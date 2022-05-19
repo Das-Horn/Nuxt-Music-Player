@@ -2,6 +2,7 @@
   <div>
     <canvas id="audio-vis-canvas"></canvas>
     <audio controls autoplay id="audio-player"></audio>
+    <slot />
   </div>
 </template>
 

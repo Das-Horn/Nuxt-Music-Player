@@ -1,7 +1,9 @@
 <template>
   <div>
     <Header />
-    <Content />
+    <Content>
+      <MusicPlayer />
+    </Content>
   </div>
 </template>
 
@@ -64,16 +66,35 @@
           this.draw();
       },
       draw(){
-          let data = [...this.data];
-          this.ctx.clearRect(0,0,this.canvas.width,this.canvas.height);
-          let space = this.canvas.width / (data.length * 0.2);
-          data.forEach((value,i)=>{
-              this.ctx.beginPath();
-              this.ctx.moveTo(space*i,this.canvas.height); //x,y
-              this.ctx.lineTo(space*i,this.canvas.height-(value / 2)); //x,y
-              this.ctx.strokeStyle = '#ff9e1f';
-              this.ctx.stroke();
-          })
+        let data = [...this.data];
+        // console.log(this.getAverageDataPoints(data, 3));
+        data = this.getAverageDataPoints(data, 10)
+        this.ctx.clearRect(0,0,this.canvas.width,this.canvas.height);
+        let space = this.canvas.width / (data.length * 1);
+        data.forEach((value,i)=>{
+            this.ctx.beginPath();
+            this.ctx.moveTo(space*i,this.canvas.height); //x,y
+            this.ctx.lineTo(space*i,this.canvas.height-(value)); //x,y
+            this.ctx.strokeStyle = '#ff9e1f';
+            this.ctx.stroke();
+        });
+      },
+      getAverageDataPoints(data, seg) {
+        const intervalAmount = Math.floor(data.length / seg);
+        let newData = [];
+        let total = 0;
+
+
+        data.forEach((value, i) => {
+          if(((i+1) % intervalAmount) === 0){
+            newData = [...newData, total / intervalAmount];
+            total = 0
+            }else {
+            // console.warn('counting');
+            total += value;
+          }
+        });
+        return newData;
       }
     },
     components: { Content },
