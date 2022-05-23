@@ -27,6 +27,9 @@
       first : true,
     }),
     methods : {
+      // This is the function that is called when the user clicks the "Open File" button. It opens a file
+      // picker and allows the user to select a file. It then sets the source of the audio player to the file
+      // that was selected.
       async openFile() {
         try {
           let f;
@@ -60,11 +63,13 @@
         this.data = new Uint8Array(this.analyser.frequencyBinCount);
         requestAnimationFrame(this.loopingFunction);
       },
+      // A recursive function that calls itself.
       loopingFunction() {
           requestAnimationFrame(this.loopingFunction);
           this.analyser.getByteFrequencyData(this.data);
           this.draw();
       },
+      // Drawing the lines on the canvas.
       draw(){
         let data = [...this.data];
         // console.log(this.getAverageDataPoints(data, 3));
@@ -79,6 +84,8 @@
             this.ctx.stroke();
         });
       },
+      // Taking the data array and dividing it into segments. It then averages the values in each segment and
+      // returns a new array with the average values.
       getAverageDataPoints(data, seg) {
         const intervalAmount = Math.floor(data.length / seg);
         let newData = [];

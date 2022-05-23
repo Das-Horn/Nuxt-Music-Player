@@ -27,4 +27,5 @@ export default {
   #audio-player {
     width:100vw;
   }
+
 </style>

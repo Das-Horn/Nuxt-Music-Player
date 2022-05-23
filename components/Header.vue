@@ -1,8 +1,9 @@
 <script>
 export default {
   methods : {
+    // Calling the function openFile() in the parent component.
     callFile(event) {
-      console.log(event);
+      // console.log(event);
       this.$parent.openFile();
     }
   }
@@ -17,11 +18,8 @@ export default {
       </b-navbar-brand>
       <b-navbar-brand href="#">Music Player</b-navbar-brand>
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-        <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
-            <b-button @click="callFile('Hello')" size="m" class="my-2 my-sm-0" >Upload</b-button>
-            <!-- <button >Upload Test </button> -->
-
+            <b-button @click="callFile" size="m" class="my-2 my-sm-0" >Upload</b-button>
           <b-nav-item-dropdown text="Theme" right>
             <b-dropdown-item >light</b-dropdown-item>
             <b-dropdown-item >dark</b-dropdown-item>
